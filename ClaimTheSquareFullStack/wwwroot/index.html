@@ -25,6 +25,7 @@
             grid-template-columns: repeat(2, 150px);
         }
     </style>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -93,23 +94,19 @@
                 `;
         }
 
-        function claim(index) {
+        async function claim(index) {
             const inputs = model.inputs;
             if (inputs.foreColor == null
                 || inputs.backColor == null
                 || inputs.text == null
                 || inputs.text.trim().length == 0
             ) return;
-            model.textObjects.push({ ...inputs, index });
-            model.inputs = {
-                foreColor: null,
-                backColor: null,
-                text: null,
-            };
-            updateView();
+            const textObject = { ...inputs, index };
+            const response = await axios.post('/textobjects', textObject);
+            init();
         }
 
-        function init() {
+        async function init() {
             model = {
                 inputs: {
                     foreColor: null,
@@ -117,10 +114,11 @@
                     text: null,
                 },
                 colors: ["black", "white", "gray", "silver", "maroon", "red", "purple", "fushsia", "green", "lime", "olive", "yellow", "navy", "blue", "teal", "aqua"],
-                textObjects: [
-                    { index: 17, text: 'Terje', backColor: 'green', foreColor: 'white' },
-                ]
             };
+
+            const response = await axios.get('/textobjects');
+            model.textObjects = response.data;
+
             updateView();
         }
     </script>
