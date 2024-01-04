@@ -1,3 +1,14 @@
+
+
+SELECT t.[Index], t.Text, c1.Color ForeColor, c2.Color BackColor
+FROM TextObject t
+JOIN Color c1 ON t.ForeColor = c1.Id
+JOIN Color c2 ON t.BackColor = c2.Id
+
+
+INSERT INTO TextObject VALUES (7, 'Hei', 4, 5)
+
+
 SELECT [Index], Text, ForeColor, BackColor, IIF(ForeColor=BackColor,'Likt', 'Ikke') AS Equal, CONCAT(ForeColor, ' ', BackColor)
 FROM TextObject
 --WHERE [Index] > 4
@@ -44,4 +55,4 @@ SELECT [Index], Text, ForeColor, Color.*
 FROM TextObject
 JOIN Color ON TextObject.ForeColor = Color.Id
 
--- Pause til 13:36
+-- Pause til 13:36
