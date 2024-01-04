@@ -5,10 +5,12 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 app.UseHttpsRedirection();
 
-var filename = "textObjects.json";
+var baseDir = AppDomain.CurrentDomain.BaseDirectory + "textobjects\\";
+Directory.CreateDirectory(baseDir);
+
 app.MapGet("/textobjects", async () =>
 {
-    var files = Directory.GetFiles(".", "*.json");
+    var files = Directory.GetFiles(baseDir, "*.json");
     var textObjects = new List<TextObject>();
     foreach (var file in files)
     {
@@ -21,7 +23,8 @@ app.MapGet("/textobjects", async () =>
 app.MapPost("/textobjects", async (TextObject textObject) =>
 {
     var json = JsonSerializer.Serialize(textObject);
-    await File.WriteAllTextAsync(textObject.Index + ".json", json);
+    var filename = baseDir + textObject.Index + ".json";
+    await File.WriteAllTextAsync(filename, json);
 });
 app.UseStaticFiles();
 app.Run();
