@@ -4,8 +4,8 @@ namespace ClaimTheSquareFullStack.DomainServices
 {
     public interface ITextObjectRepository
     {
-        IEnumerable<TextObject> ReadAll();
-        TextObject ReadOne(int index);
-        bool Create(TextObject textObject);
+        Task<IEnumerable<TextObject>> ReadAll();
+        Task<TextObject> ReadOne(int index);
+        Task<bool> Create(TextObjectInt textObject);
     }
 }
