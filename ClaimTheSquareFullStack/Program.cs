@@ -1,13 +1,20 @@
-using System.Data.SqlClient;
+using System.Data.SqlClient;using ClaimTheSquareFullStack;
 using ClaimTheSquareFullStack.DbModels;
 using Dapper;
 using TextObject = ClaimTheSquareFullStack.ViewModel.TextObject;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var connStr = builder.Configuration.GetConnectionString("TextObjectsDb");
+var connectionFactory = new SqlConnectionFactory(connStr);
+builder.Services.AddSingleton(connectionFactory);
+//builder.Services.AddScoped()
+//builder.Services.AddTransient()
 var app = builder.Build();
 app.UseHttpsRedirection();
 
-var connStr = builder.Configuration.GetConnectionString("TextObjectsDb");
+// Pause til 10:35
+
 
 app.MapGet("/textobjects", async () =>
 {
