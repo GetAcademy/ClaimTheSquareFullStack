@@ -1,12 +1,4 @@
-using System.Data.SqlClient;
-using ClaimTheSquareFullStack.DbModels;
-using Dapper;
-using TextObject = ClaimTheSquareFullStack.ViewModel.TextObject;
-
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
-app.UseHttpsRedirection();
-
+﻿/*
 var connStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TextObjects;Integrated Security=True";
 app.MapGet("/textobjects", async () =>
 {
@@ -34,5 +26,4 @@ app.MapPost("/textobjects", async (TextObject textObject) =>
     var rowsAffected = await conn.ExecuteAsync(sql, dbTextObject);
     return rowsAffected;
 });
-app.UseStaticFiles();
-app.Run();
+*/

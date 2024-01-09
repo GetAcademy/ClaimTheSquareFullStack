@@ -1,0 +1,27 @@
+ASP.NET - Dependency Injection
+ - ConnectionString fra appsettings.json
+   string connString = builder.Configuration.GetConnectionString("DefaultConnection");
+ - Interface for interaksjon med databasen. Klasse som implementerer dette. 
+ - SqlConnectionFactory
+ - Logikk: Farge og tekst må begynne på samme bokstav. Interface for service + implementasjon.
+
+Videre på SQL
+1. SQL Server Management Studio og Visual Studio
+2. Lage tabell for textobjects v1, primærnøkkel
+3. CRUD-operasjonene: 
+   - Create (INSERT INTO)
+   - Read (SELECT)
+   - Update (UPDATE)
+   - Delete (DELETE)
+4. Relasjoner, normalisering, JOIN
+   - textobjects v2
+5. SQL fra C# ved hjelp av Dapper
+6. Skrive om textobject-backend til å bruke SQL
+7. Ev. litt mer i dybden om SQL og mengdelære
+   - GUID og databasetilordnet indeks
+   - sqlbolt.com
+   - UNION (pluss), EXCEPT (minus), INTERSECT
+   - JOIN (gange)
+   - SQL er expression based
+   - SELECT INTO
+   - GROUP BY
