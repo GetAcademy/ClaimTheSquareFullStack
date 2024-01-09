@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 app.UseHttpsRedirection();
 
-var connStr = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TextObjects;Integrated Security=True";
+var connStr = builder.Configuration.GetConnectionString("TextObjectsDb");
+
 app.MapGet("/textobjects", async () =>
 {
     var conn = new SqlConnection(connStr);
@@ -20,6 +21,21 @@ app.MapGet("/textobjects", async () =>
     var textObjects = await conn.QueryAsync<TextObject>(sql);
     return textObjects;
 });
+
+app.MapGet("/textobjects/{index}", async (int index) =>
+{
+    var conn = new SqlConnection(connStr);
+    var sql = @"
+        SELECT t.[Index], t.Text, c1.Color ForeColor, c2.Color BackColor
+        FROM TextObject t
+        JOIN Color c1 ON t.ForeColor = c1.Id
+        JOIN Color c2 ON t.BackColor = c2.Id
+        WHERE t.[Index] = @Index
+    ";
+    var textObjects = await conn.QueryAsync<TextObject>(sql, new { Index = index });
+    return textObjects.FirstOrDefault();
+});
+
 app.MapPost("/textobjects", async (TextObject textObject) =>
 {
     var conn = new SqlConnection(connStr);
