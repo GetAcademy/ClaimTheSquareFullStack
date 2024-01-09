@@ -55,4 +55,18 @@ SELECT [Index], Text, ForeColor, Color.*
 FROM TextObject
 JOIN Color ON TextObject.ForeColor = Color.Id
 
--- Pause til 13:36
+
+SELECT Text, COUNT(*) [RowCount]
+FROM TextObject
+GROUP BY Text
+
+SELECT * 
+INTO People
+FROM 
+(
+	SELECT 'Per' Name
+	UNION
+	SELECT 'Pål' Name
+	UNION
+	SELECT 'Espen' Name
+) n
