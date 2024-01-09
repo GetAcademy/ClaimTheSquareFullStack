@@ -3,7 +3,9 @@ ASP.NET - Dependency Injection
    string connString = builder.Configuration.GetConnectionString("DefaultConnection");
  - Interface for interaksjon med databasen. Klasse som implementerer dette. 
  - SqlConnectionFactory
+ - AddSingleton, AddScoped og AddTransient
  - Logikk: Farge og tekst må begynne på samme bokstav. Interface for service + implementasjon.
+ - app.MapGet("/textobjects/{id}"
 
 Videre på SQL
 1. SQL Server Management Studio og Visual Studio
